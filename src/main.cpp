@@ -9,17 +9,19 @@
 #include "horloge.h"
 #include "homeiot.h"
 #include "launchers.h"
-
-#include "const.h"
+#include "mode.h"
+#include "dashboard.h"
 
 Network network;
-HomeIot homeiot;
+HomeIot* homeiot = new HomeIot();
 Horloge horloge;
 Display display;
 
+Mode mode(display);
 TopBar topbar(display, horloge, network);
-
 Launchers launchers(display);
+Dashboard dashboard(display, homeiot);
+
 
 void setup() {
 	Serial.begin(115200);
@@ -30,39 +32,37 @@ void setup() {
 	display.flush();
 
 	network.init();
-	homeiot.init();
 	horloge.init();
-
-	//	Keyboard.begin();
-	// USB.begin();
 
 }
 
-bool k = false;
 void loop() {
 
 	display.fillScreen(RGB565_LIGHTGREY);
 	topbar.draw();
-	launchers.draw();
+	switch (mode.get()) {
+	default:
+	case 0:
+		dashboard.draw();
+		break;
+	case 1:
+		launchers.draw();
+		break;
+	}
+	mode.draw();
 
-	// display.drawCenterText(160, 240, String(homeiot.getCaptorF(100), 1), RGB565_BLACK);
+	dashboard.update();
 
 	if (display.isTouched()) {
-		launchers.touched(display.touchX, display.touchY);
-		// 	display.drawCenterText(160, 240, String(display.touchX) + "," + String(display.touchY), RGB565_BLACK);
-		// 	// if (k) {
-		// 	// 	Keyboard.println("bonjour");
-		// 	// } else {
-		// 	// 	USB.begin();
-		// 	// 	Keyboard.begin();
-		// 	// 	k = true;
-		// 	// }
-		while (display.isTouched()) delay(1);
-		delay(100);
+		switch (mode.get()) {
+		case 1:
+			launchers.touched(display.touchX, display.touchY);
+			break;
+		}
+		mode.touched(display.touchX, display.touchY);
+		while (display.isTouched()) delay(10);
 	}
-
 	display.flush();
-
 	delay(5);
 }
 

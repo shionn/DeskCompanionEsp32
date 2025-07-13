@@ -29,6 +29,12 @@ void Display::drawSprite(uint16_t x, uint16_t y, uint16_t* sprite) {
 	this->gfx->draw16bitRGBBitmapWithTranColor(x, y, sprite + 2, RGB565(255, 0, 255), sprite[0], sprite[1]);
 };
 
+void Display::drawText(uint16_t x, uint16_t y, const String& text, uint16_t color) {
+	this->gfx->setCursor(x, y);
+	this->gfx->setTextColor(color);
+	this->gfx->print(text);
+};
+
 void Display::drawCenterText(uint16_t x, uint16_t y, const String& text, uint16_t color) {
 	this->gfx->setCursor(x - text.length() * 6, y);
 	this->gfx->setTextColor(color);
@@ -41,6 +47,14 @@ void Display::fillScreen(uint16_t color) {
 
 void Display::fillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color) {
 	this->gfx->fillRect(x, y, w, h, color);
+};
+
+void Display::fillCircle(uint16_t x, uint16_t y, uint16_t r, uint16_t color) {
+	this->gfx->fillCircle(x, y, r, color);
+};
+
+void Display::fillTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3, uint16_t color) {
+	this->gfx->fillTriangle(x1, y1, x2, y2, x3, y3, color);
 };
 
 

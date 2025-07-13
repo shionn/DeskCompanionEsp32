@@ -1,10 +1,10 @@
 
+#ifndef __DISPLAY_H__
+#define __DISPLAY_H__
+
 #include <Arduino.h>
 #include <Arduino_GFX_Library.h>
 #include <Wire.h>
-
-#ifndef __DISPLAY_H__
-#define __DISPLAY_H__
 
 #define DISPLAY_BACKLIGHT 1
 #define TOUCH_ADDR 0x3B
@@ -29,9 +29,12 @@ public:
 	Arduino_Canvas* getGfx();
 
 	void drawSprite(uint16_t x, uint16_t y, uint16_t* sprite);
+	void drawText(uint16_t x, uint16_t y, const String& text, uint16_t color);
 	void drawCenterText(uint16_t x, uint16_t y, const String& text, uint16_t color);
 	void fillScreen(u16_t color);
 	void fillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
+	void fillCircle(uint16_t x, uint16_t y, uint16_t r, uint16_t color);
+	void fillTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3, uint16_t color);
 
 	void flush();
 

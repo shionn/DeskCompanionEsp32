@@ -37,10 +37,22 @@ void Launchers::touched(uint16_t touchX, uint16_t touchY) {
 					Keyboard.press(KEY_F2);
 					Keyboard.releaseAll();
 					delay(1);
-					Keyboard.println(this->shortcuts[iy][ix].cmd);
+					Keyboard.print(this->toLocalFr(this->shortcuts[iy][ix].cmd));
+					delay(10);
+					Keyboard.press(KEY_RETURN);
+					Keyboard.releaseAll();
 					delay(1000);
 				}
 			}
 		}
 	}
+}
+
+String Launchers::toLocalFr(String cmd) {
+	cmd.replace('a', 'q');
+	cmd.replace('m', ';');
+	cmd.replace('/', '>');
+	cmd.replace('-', '6');
+	cmd.replace(':', '.');
+	return cmd;
 }

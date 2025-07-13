@@ -1,6 +1,10 @@
 
 #include "homeiot.h"
 
+HomeIot::HomeIot() {
+
+}
+
 void HomeIot::init() {
 
 };
