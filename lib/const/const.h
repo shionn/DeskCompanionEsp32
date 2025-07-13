@@ -5,5 +5,11 @@
 #include "mimic.h"
 #include "wifi.h"
 
+#include "discord.h"
+#include "eclipse.h"
+#include "firefox.h"
+#include "homer.h"
+#include "terminal.h"
+#include "vscode.h"
 
 #endif

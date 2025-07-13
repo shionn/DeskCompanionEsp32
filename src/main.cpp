@@ -7,19 +7,19 @@
 #include "display.h"
 #include "topbar.h"
 #include "horloge.h"
+#include "homeiot.h"
+#include "launchers.h"
 
 #include "const.h"
 
-#include "USB.h"
-#include "USBHIDKeyboard.h"
-
-
 Network network;
-Display display;
+HomeIot homeiot;
 Horloge horloge;
+Display display;
+
 TopBar topbar(display, horloge, network);
 
-USBHIDKeyboard Keyboard;
+Launchers launchers(display);
 
 void setup() {
 	Serial.begin(115200);
@@ -30,6 +30,7 @@ void setup() {
 	display.flush();
 
 	network.init();
+	homeiot.init();
 	horloge.init();
 
 	//	Keyboard.begin();
@@ -42,16 +43,22 @@ void loop() {
 
 	display.fillScreen(RGB565_LIGHTGREY);
 	topbar.draw();
+	launchers.draw();
+
+	// display.drawCenterText(160, 240, String(homeiot.getCaptorF(100), 1), RGB565_BLACK);
 
 	if (display.isTouched()) {
-		display.drawCenterText(160, 240, String(display.touchX) + "," + String(display.touchY), RGB565_BLACK);
-		if (k) {
-			Keyboard.println("bonjour");
-		} else {
-			USB.begin();
-			Keyboard.begin();
-			k = true;
-		}
+		launchers.touched(display.touchX, display.touchY);
+		// 	display.drawCenterText(160, 240, String(display.touchX) + "," + String(display.touchY), RGB565_BLACK);
+		// 	// if (k) {
+		// 	// 	Keyboard.println("bonjour");
+		// 	// } else {
+		// 	// 	USB.begin();
+		// 	// 	Keyboard.begin();
+		// 	// 	k = true;
+		// 	// }
+		while (display.isTouched()) delay(1);
+		delay(100);
 	}
 
 	display.flush();

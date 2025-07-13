@@ -1,1 +1,3 @@
 lib/network/ssid.h
+.pio/
+.vscode/

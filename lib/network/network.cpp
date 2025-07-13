@@ -11,5 +11,6 @@ void Network::init() {
 }
 
 bool Network::connected() {
+	
 	return WiFi.status() == WL_CONNECTED;
 }
