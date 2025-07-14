@@ -1,6 +1,6 @@
 #include "launchers.h"
 
-Launchers::Launchers(Display display) {
+Launchers::Launchers(Display* display) {
 	this->display = display;
 }
 
@@ -14,14 +14,14 @@ void Launchers::draw() {
 	}
 }
 
-void Launchers::drawicon(uint16_t ix, uint16_t iy, uint16_t* icon) {
+void Launchers::drawicon(uint16_t ix, uint16_t iy, const uint16_t* icon) {
 	int x = ix * 64 + 8 + 16 * ix;
 	int y = iy * 64 + 26 + 16 * iy;
-	this->display.drawSprite(x, y, icon);
+	this->display->drawSprite(x, y, icon);
 	// this->display.getGfx()->drawRoundRect(x, y, 64, 64, 8, RGB565_BLACK);
 }
 
-void Launchers::touched(uint16_t touchX, uint16_t touchY) {
+bool Launchers::touched(uint16_t touchX, uint16_t touchY) {
 	if (!this->initialized) {
 		USB.begin();
 		Keyboard.begin();
@@ -41,11 +41,12 @@ void Launchers::touched(uint16_t touchX, uint16_t touchY) {
 					delay(10);
 					Keyboard.press(KEY_RETURN);
 					Keyboard.releaseAll();
-					delay(1000);
+					return true;
 				}
 			}
 		}
 	}
+	return false;
 }
 
 String Launchers::toLocalFr(String cmd) {

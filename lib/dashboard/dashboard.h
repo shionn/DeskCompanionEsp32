@@ -8,13 +8,13 @@
 
 class Dashboard {
 private:
-	Display display;
+	Display* display;
 	HomeIot* iot;
 	float_t cpu, gpu, nvme, office, bedroom, exterior;
 	float_t elec_prod, elec_consso;
 	long lastUpdated = 0;
 public:
-	Dashboard(Display display, HomeIot* iot);
+	Dashboard(Display* display, HomeIot* iot);
 	void draw();
 	void touched(uint16_t touchX, uint16_t touchY);
 	void update();

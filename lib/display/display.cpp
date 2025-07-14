@@ -25,8 +25,8 @@ Arduino_Canvas* Display::getGfx() {
 	return this->gfx;
 };
 
-void Display::drawSprite(uint16_t x, uint16_t y, uint16_t* sprite) {
-	this->gfx->draw16bitRGBBitmapWithTranColor(x, y, sprite + 2, RGB565(255, 0, 255), sprite[0], sprite[1]);
+void Display::drawSprite(uint16_t x, uint16_t y, const uint16_t* sprite) {
+	this->gfx->draw16bitRGBBitmapWithTranColor(x, y, const_cast<uint16_t*>(sprite) + 2, RGB565(255, 0, 255), sprite[0], sprite[1]);
 };
 
 void Display::drawText(uint16_t x, uint16_t y, const String& text, uint16_t color) {
@@ -96,9 +96,9 @@ bool Display::isTouched() {
 
 	Wire.beginTransmission(TOUCH_ADDR);
 	Wire.write(read_cmd, 11);
-	if (Wire.endTransmission() != 0) return false;
+	while (Wire.endTransmission() != 0);
 
-	if (Wire.requestFrom(TOUCH_ADDR, sizeof(data)) != sizeof(data)) return false;
+	while (Wire.requestFrom(TOUCH_ADDR, sizeof(data)) != sizeof(data));
 
 	for (int i = 0; i < sizeof(data); i++) {
 		data[i] = Wire.read();

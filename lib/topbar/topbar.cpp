@@ -15,7 +15,7 @@ void TopBar::draw() {
 	date += horloge->getMinute() < 10 ? "0" + String(horloge->getMinute()) : String(horloge->getMinute());
 	display->drawCenterText(160, 2, date, RGB565_WHITE);
 	if (network->connected()) {
-		display->drawSprite(306, 3, wifi);
+		display->drawSprite(306, 3, (uint16_t*)wifi);
 	}
 	for (int i = 0; i <= MAX_MODE; i++) {
 		if (i == mode->get()) {

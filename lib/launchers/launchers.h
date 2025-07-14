@@ -9,14 +9,14 @@
 #define __LAUNCHERS_H__
 
 typedef struct {
-	uint16_t* icon;
+	const uint16_t* icon;
 	String cmd;
 } t_shortcut;
 
 class Launchers {
 private:
 	USBHIDKeyboard Keyboard;
-	Display display;
+	Display* display;
 	bool initialized = false;
 	t_shortcut shortcuts[5][4] = {
 		{ { homer, "firefox http://homer/"}, { firefox, "firefox" }, { NULL, ""}, { discord, "discord" } },
@@ -27,13 +27,13 @@ private:
 	};
 
 public:
-	Launchers(Display display);
+	Launchers(Display* display);
 
 	void draw();
-	void touched(uint16_t touchX, uint16_t touchy);
+	bool touched(uint16_t touchX, uint16_t touchy);
 
 private:
-	void drawicon(uint16_t x, uint16_t y, uint16_t* icon);
+	void drawicon(uint16_t x, uint16_t y, const uint16_t* icon);
 	String toLocalFr(String cmd);
 };
 

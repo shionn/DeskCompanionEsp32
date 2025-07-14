@@ -1,16 +1,16 @@
 #include "dashboard.h"
 
-Dashboard::Dashboard(Display display, HomeIot* iot) {
+Dashboard::Dashboard(Display* display, HomeIot* iot) {
 	this->display = display;
 	this->iot = iot;
 }
 
 void Dashboard::draw() {
-	this->display.drawCenterText(160, 30, "Temperature O11dw", RGB565_BLACK);
+	this->display->drawCenterText(160, 30, "Temperature O11dw", RGB565_BLACK);
 	this->drawTempBar(50, "Cpu", this->cpu, 0, 90);
 	this->drawTempBar(72, "Gpu", this->gpu, 0, 90);
 	this->drawTempBar(94, "Nvme", this->nvme, 0, 90);
-	this->display.drawCenterText(160, 120, "Maison", RGB565_BLACK);
+	this->display->drawCenterText(160, 120, "Maison", RGB565_BLACK);
 	this->drawTempBar(140, "Exterieur", this->exterior, 0, 50);
 	this->drawTempBar(162, "Bureau", this->office, 0, 50);
 	this->drawTempBar(184, "Morgan", this->bedroom, 0, 50);
@@ -28,11 +28,11 @@ void Dashboard::drawTempBar(uint16_t y, String text, float_t value, uint16_t min
 	if (value - min >= 3 * (max - min) / 4) {
 		color = RGB565_RED;
 	}
-	this->display.fillRoundRect(10, y, 300, 20, 3, RGB565_LIGHTGREY);
-	this->display.fillRoundRect(10, y, map(value, min, max, 0, 300), 20, 3, color);
-	this->display.drawText(13, y + 3, text, RGB565_BLACK);
-	this->display.drawRightText(307, y + 3, String(value, 1) + "c", RGB565_BLACK);
-	this->display.drawRoundRect(10, y, 300, 20, 3, RGB565_BLACK);
+	this->display->fillRoundRect(10, y, 300, 20, 3, RGB565_LIGHTGREY);
+	this->display->fillRoundRect(10, y, map(value, min, max, 0, 300), 20, 3, color);
+	this->display->drawText(13, y + 3, text, RGB565_BLACK);
+	this->display->drawRightText(307, y + 3, String(value, 1) + "c", RGB565_BLACK);
+	this->display->drawRoundRect(10, y, 300, 20, 3, RGB565_BLACK);
 }
 
 void Dashboard::drawElecBar(uint16_t y, String text, float_t value, float_t min, float_t max) {
@@ -43,11 +43,11 @@ void Dashboard::drawElecBar(uint16_t y, String text, float_t value, float_t min,
 	if (value - min >= 3 * (max - min) / 4) {
 		color = RGB565_RED;
 	}
-	this->display.fillRoundRect(10, y, 300, 20, 3, RGB565_LIGHTGREY);
-	this->display.fillRoundRect(10, y, map(value * 1000, min * 1000, max * 1000, 0, 300), 20, 3, color);
-	this->display.drawText(13, y + 3, text, RGB565_BLACK);
-	this->display.drawRightText(307, y + 3, String(value, 3) + "kw", RGB565_BLACK);
-	this->display.drawRoundRect(10, y, 300, 20, 3, RGB565_BLACK);
+	this->display->fillRoundRect(10, y, 300, 20, 3, RGB565_LIGHTGREY);
+	this->display->fillRoundRect(10, y, map(value * 1000, min * 1000, max * 1000, 0, 300), 20, 3, color);
+	this->display->drawText(13, y + 3, text, RGB565_BLACK);
+	this->display->drawRightText(307, y + 3, String(value, 3) + "kw", RGB565_BLACK);
+	this->display->drawRoundRect(10, y, 300, 20, 3, RGB565_BLACK);
 }
 
 
