@@ -28,10 +28,11 @@ void Dashboard::drawTempBar(uint16_t y, String text, float_t value, uint16_t min
 	if (value - min >= 3 * (max - min) / 4) {
 		color = RGB565_RED;
 	}
-	this->display.fillRect(10, y, map(value, min, max, 0, 300), 20, color);
-	this->display.drawText(12, y + 2, text, RGB565_BLACK);
-	this->display.drawRightText(308, y + 2, String(value, 1) + "c", RGB565_BLACK);
-	this->display.drawRect(10, y, 300, 20, RGB565_BLACK);
+	this->display.fillRoundRect(10, y, 300, 20, 3, RGB565_LIGHTGREY);
+	this->display.fillRoundRect(10, y, map(value, min, max, 0, 300), 20, 3, color);
+	this->display.drawText(13, y + 3, text, RGB565_BLACK);
+	this->display.drawRightText(307, y + 3, String(value, 1) + "c", RGB565_BLACK);
+	this->display.drawRoundRect(10, y, 300, 20, 3, RGB565_BLACK);
 }
 
 void Dashboard::drawElecBar(uint16_t y, String text, float_t value, float_t min, float_t max) {
@@ -42,10 +43,11 @@ void Dashboard::drawElecBar(uint16_t y, String text, float_t value, float_t min,
 	if (value - min >= 3 * (max - min) / 4) {
 		color = RGB565_RED;
 	}
-	this->display.fillRect(10, y, map(value * 1000, min * 1000, max * 1000, 0, 300), 20, color);
-	this->display.drawText(12, y + 2, text, RGB565_BLACK);
-	this->display.drawRightText(308, y + 2, String(value, 3) + "kw", RGB565_BLACK);
-	this->display.drawRect(10, y, 300, 20, RGB565_BLACK);
+	this->display.fillRoundRect(10, y, 300, 20, 3, RGB565_LIGHTGREY);
+	this->display.fillRoundRect(10, y, map(value * 1000, min * 1000, max * 1000, 0, 300), 20, 3, color);
+	this->display.drawText(13, y + 3, text, RGB565_BLACK);
+	this->display.drawRightText(307, y + 3, String(value, 3) + "kw", RGB565_BLACK);
+	this->display.drawRoundRect(10, y, 300, 20, 3, RGB565_BLACK);
 }
 
 

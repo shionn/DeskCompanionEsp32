@@ -54,9 +54,16 @@ void Display::fillScreen(uint16_t color) {
 void Display::drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color) {
 	this->gfx->drawRect(x, y, w, h, color);
 };
+void Display::drawRoundRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t r, uint16_t color) {
+	this->gfx->drawRoundRect(x, y, w, h, r, color);
+};
 
 void Display::fillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color) {
 	this->gfx->fillRect(x, y, w, h, color);
+};
+
+void Display::fillRoundRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t r, uint16_t color) {
+	this->gfx->fillRoundRect(x, y, w, h, r, color);
 };
 
 void Display::drawCircle(uint16_t x, uint16_t y, uint16_t r, uint16_t color) {

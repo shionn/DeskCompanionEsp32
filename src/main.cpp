@@ -27,7 +27,7 @@ void setup() {
 	Serial.begin(115200);
 
 	display.init();
-	display.fillScreen(RGB565_LIGHTGREY);
+	display.fillScreen(RGB565_WHITE);
 	display.drawCenterText(160, 240, "Starting...", RGB565_BLACK);
 	display.flush();
 
@@ -38,7 +38,7 @@ void setup() {
 
 void loop() {
 
-	display.fillScreen(RGB565_LIGHTGREY);
+	display.fillScreen(RGB565_WHITE);
 	topbar.draw();
 	switch (mode.get()) {
 	default:

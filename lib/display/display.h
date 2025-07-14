@@ -32,10 +32,12 @@ public:
 	void drawCenterText(uint16_t x, uint16_t y, const String& text, uint16_t color);
 	void drawRightText(uint16_t x, uint16_t y, const String& text, uint16_t color);
 	void drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
+	void drawRoundRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t r, uint16_t color);
 	void drawSprite(uint16_t x, uint16_t y, uint16_t* sprite);
 	void drawText(uint16_t x, uint16_t y, const String& text, uint16_t color);
 	void fillCircle(uint16_t x, uint16_t y, uint16_t r, uint16_t color);
 	void fillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
+	void fillRoundRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t r, uint16_t color);
 	void fillScreen(u16_t color);
 	void fillTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3, uint16_t color);
 

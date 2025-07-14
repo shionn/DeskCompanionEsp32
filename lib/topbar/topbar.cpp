@@ -9,7 +9,7 @@ TopBar::TopBar(Display* display, Horloge* horloge, Network* network, Mode* mode)
 };
 
 void TopBar::draw() {
-	display->fillRect(0, 0, 320, 18, RGB565_DARKGREY);
+	display->fillRect(0, 0, 320, 18, RGB565_BLACK);
 	String date = horloge->getHour() < 10 ? "0" + String(horloge->getHour()) : String(horloge->getHour());
 	date += (horloge->getSecond()) % 2 ? ":" : " ";
 	date += horloge->getMinute() < 10 ? "0" + String(horloge->getMinute()) : String(horloge->getMinute());
