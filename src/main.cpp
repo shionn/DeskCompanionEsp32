@@ -34,6 +34,7 @@ void setup() {
 	display.flush();
 
 	network.init();
+	launchers.init();
 	horloge.init();
 
 }
@@ -78,5 +79,6 @@ void loop() {
 		delay(300);
 		while (display.isTouched()) delay(100);
 	}
+	delay(100);
 }
 

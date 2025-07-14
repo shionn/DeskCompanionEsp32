@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <USB.h>
 #include <USBHIDKeyboard.h>
+// #include <BleKeyboard.h>
 
 #include "display.h"
 #include "const.h"
@@ -15,20 +16,22 @@ typedef struct {
 
 class Launchers {
 private:
-	USBHIDKeyboard Keyboard;
+	// BleKeyboard keyboard;
+	USBHIDKeyboard keyboard;
 	Display* display;
 	bool initialized = false;
 	t_shortcut shortcuts[5][4] = {
-		{ { homer, "firefox http://homer/"}, { firefox, "firefox" }, { NULL, ""}, { discord, "discord" } },
-		{ { terminal, "x-terminal-emulator"}, { NULL, "" }, { eclipse, "eclipse" }, { vscode, "code" } },
+		{ { homer, F("firefox http://homer/")}, { firefox, F("firefox") }, { NULL, ""}, { discord, F("discord") } },
+		{ { terminal, F("x-terminal-emulator")}, { NULL, "" }, { eclipse, F("eclipse") }, { vscode, F("code") } },
 		{ { NULL, ""}, { NULL, "" }, { NULL, "" }, { NULL, "" } },
-		{ { openscad, "openscad"}, { cura, "cura" }, { NULL, "" }, { gimp, "gimp" } },
-		{ { steam, "steam"}, { heroic, "heroic" }, { lutris, "lutris" }, { minecraft, "minecraft-launcher" } }
+		{ { openscad, F("openscad")}, { cura, F("cura") }, { NULL, "" }, { gimp, F("gimp") } },
+		{ { steam, F("steam")}, { heroic, F("heroic") }, { lutris, F("lutris") }, { minecraft, F("minecraft-launcher") } }
 	};
 
 public:
 	Launchers(Display* display);
 
+	void init();
 	void draw();
 	bool touched(uint16_t touchX, uint16_t touchy);
 

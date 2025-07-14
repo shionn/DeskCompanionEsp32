@@ -4,6 +4,9 @@
 
 #include <Arduino.h>
 #include <Arduino_GFX_Library.h>
+// #include <display/Arduino_AXS15231B.h>
+// #include <databus/Arduino_ESP32QSPI.h>
+// #include <canvas/Arduino_Canvas.h>
 #include <Wire.h>
 
 #define DISPLAY_BACKLIGHT 1
