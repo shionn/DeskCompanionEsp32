@@ -19,11 +19,11 @@ private:
 	Display display;
 	bool initialized = false;
 	t_shortcut shortcuts[5][4] = {
-		{ { firefox, "firefox" }, { NULL, "" }, { NULL, ""}, { discord, "discord" } },
-		{ { homer, "firefox http://homer/"}, { NULL, "" }, { NULL, "" }, { NULL, "" } },
-		{ { terminal, "x-terminal-emulator"}, { eclipse, "eclipse" }, { vscode, "code" }, { NULL, "" } },
+		{ { homer, "firefox http://homer/"}, { firefox, "firefox" }, { NULL, ""}, { discord, "discord" } },
+		{ { terminal, "x-terminal-emulator"}, { NULL, "" }, { eclipse, "eclipse" }, { vscode, "code" } },
 		{ { NULL, ""}, { NULL, "" }, { NULL, "" }, { NULL, "" } },
-		{ { NULL, ""}, { NULL, "" }, { NULL, "" }, { NULL, "" } }
+		{ { openscad, "openscad"}, { cura, "cura" }, { NULL, "" }, { gimp, "gimp" } },
+		{ { steam, "steam"}, { heroic, "heroic" }, { lutris, "lutris" }, { minecraft, "minecraft-launcher" } }
 	};
 
 public:

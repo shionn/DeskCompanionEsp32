@@ -19,7 +19,7 @@ void Mode::touched(uint16_t touchX, uint16_t touchY) {
 	if (touchX < 25 && touchY>455 && this->value > 0) {
 		this->value--;
 	}
-	if (touchX > 295 && touchY > 455 && this->value < 1) {
+	if (touchX > 295 && touchY > 455 && this->value < MAX_MODE) {
 		this->value++;
 	}
 }

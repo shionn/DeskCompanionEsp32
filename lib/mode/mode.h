@@ -4,6 +4,7 @@
 #ifndef __MODE_H__
 #define __MODE_H__
 
+#define MAX_MODE 1
 
 class Mode {
 private:
