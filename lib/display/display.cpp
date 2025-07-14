@@ -41,8 +41,18 @@ void Display::drawCenterText(uint16_t x, uint16_t y, const String& text, uint16_
 	this->gfx->print(text);
 };
 
+void Display::drawRightText(uint16_t x, uint16_t y, const String& text, uint16_t color) {
+	this->gfx->setCursor(x - text.length() * 12, y);
+	this->gfx->setTextColor(color);
+	this->gfx->print(text);
+};
+
 void Display::fillScreen(uint16_t color) {
 	this->gfx->fillScreen(color);
+};
+
+void Display::drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color) {
+	this->gfx->drawRect(x, y, w, h, color);
 };
 
 void Display::fillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color) {

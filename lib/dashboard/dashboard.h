@@ -4,12 +4,14 @@
 
 #include "display.h"
 #include "homeiot.h"
+#include "const.h"
 
 class Dashboard {
 private:
 	Display display;
 	HomeIot* iot;
-	uint16_t cpu, gpu, nvme, office, bedroom;
+	float_t cpu, gpu, nvme, office, bedroom, exterior;
+	float_t elec_prod, elec_consso;
 	long lastUpdated = 0;
 public:
 	Dashboard(Display display, HomeIot* iot);
@@ -18,7 +20,8 @@ public:
 	void update();
 
 private:
-	void drawTemperatue(uint16_t y, String text, uint16_t value, uint16_t min, uint16_t max);
+	void drawTempBar(uint16_t y, String text, float_t value, uint16_t min, uint16_t max);
+	void drawElecBar(uint16_t y, String text, float_t value, float_t min, float_t max);
 };
 
 

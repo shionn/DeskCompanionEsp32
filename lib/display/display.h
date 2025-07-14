@@ -30,6 +30,8 @@ public:
 
 	void drawCircle(uint16_t x, uint16_t y, uint16_t r, uint16_t color);
 	void drawCenterText(uint16_t x, uint16_t y, const String& text, uint16_t color);
+	void drawRightText(uint16_t x, uint16_t y, const String& text, uint16_t color);
+	void drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
 	void drawSprite(uint16_t x, uint16_t y, uint16_t* sprite);
 	void drawText(uint16_t x, uint16_t y, const String& text, uint16_t color);
 	void fillCircle(uint16_t x, uint16_t y, uint16_t r, uint16_t color);
