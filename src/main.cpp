@@ -13,14 +13,14 @@
 #include "dashboard.h"
 
 Network network;
-HomeIot* homeiot = new HomeIot();
+HomeIot homeiot;
 Horloge horloge;
 Display display;
 
 Mode mode(display);
-TopBar topbar(display, horloge, network);
+TopBar topbar(&display, &horloge, &network, &mode);
 Launchers launchers(display);
-Dashboard dashboard(display, homeiot);
+Dashboard dashboard(display, &homeiot);
 
 
 void setup() {
