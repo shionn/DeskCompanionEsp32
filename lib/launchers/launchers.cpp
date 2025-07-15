@@ -24,11 +24,15 @@ void Launchers::drawicon(uint16_t ix, uint16_t iy, const uint16_t* icon) {
 	// this->display.getGfx()->drawRoundRect(x, y, 64, 64, 8, RGB565_BLACK);
 }
 
-bool Launchers::touched(uint16_t touchX, uint16_t touchY) {
+bool Launchers::pressed(uint16_t touchX, uint16_t touchY) {
+	return false;
+}
+
+bool Launchers::released(uint16_t touchX, uint16_t touchY) {
 	if (!this->initialized) {
-		USB.begin();
-		keyboard.begin();
-		this->initialized = true;
+		// USB.begin();
+		// keyboard.begin();
+		// this->initialized = true;
 	}
 	for (int ix = 0; ix < 4; ix++) {
 		for (int iy = 0; iy < 5; iy++) {

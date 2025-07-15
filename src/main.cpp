@@ -18,11 +18,11 @@ HomeIot homeiot;
 Horloge horloge;
 Display display;
 
-Mode mode(&display);
-TopBar topbar(&display, &horloge, &network, &mode);
 Dashboard dashboard(&display, &homeiot);
 Launchers launchers(&display);
 Drawer drawer(&display);
+Mode mode(&dashboard, &launchers, &drawer, &display);
+TopBar topbar(&display, &horloge, &network, &mode);
 
 
 void setup() {
@@ -39,23 +39,18 @@ void setup() {
 
 }
 
+bool touch = false;
+
 void loop() {
 	if (mode.get() != 2) display.fillScreen(RGB565_WHITE);
 
 	dashboard.update();
-	boolean consummed = false;
 	if (display.isTouched()) {
-		switch (mode.get()) {
-		case 1:
-			consummed = launchers.touched(display.touchX, display.touchY);
-			break;
-		case 2:
-			drawer.touched(display.touchX, display.touchY);
-			break;
-		}
-		if (!consummed) {
-			consummed = mode.touched(display.touchX, display.touchY);
-		}
+		touch = true;
+		mode.pressed(display.touchX, display.touchY);
+	} else if (touch) {
+		touch = false;
+		mode.released(display.touchX, display.touchY);
 	}
 
 	topbar.draw();
@@ -75,10 +70,5 @@ void loop() {
 
 
 	display.flush();
-	if (consummed) {
-		delay(300);
-		while (display.isTouched()) delay(100);
-	}
-	delay(100);
 }
 

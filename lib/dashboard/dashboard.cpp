@@ -64,3 +64,6 @@ void Dashboard::update() {
 		this->exterior = iot->getHaF("weather.forecast_maison", "temperature");
 	}
 };
+
+boolean Dashboard::pressed(uint16_t touchX, uint16_t touchY) { return false; }
+boolean Dashboard::released(uint16_t touchX, uint16_t touchY) { return false; }

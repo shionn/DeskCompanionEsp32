@@ -12,16 +12,23 @@ void Drawer::draw() {
 	}
 }
 
-void Drawer::touched(uint16_t touchX, uint16_t touchY) {
+bool Drawer::pressed(uint16_t touchX, uint16_t touchY) {
+	if (touchY > 20 && touchY < 450) {
+		this->display->getGfx()->fillCircle(touchX, touchY, 2, getColor(this->color));
+		// drawer_bitmap[(touchY - 20) * 320 + touchX] = getColor(this->color);
+	}
+	return false;
+}
+
+bool Drawer::released(uint16_t touchX, uint16_t touchY) {
 	if (touchY > 450) {
 		if (touchX > 30 && touchX < 290) {
 			int i = (touchX - 30) / 30;
 			this->color = i;
+			return true;
 		}
-	} else if (touchY > 20) {
-		this->display->getGfx()->fillCircle(touchX, touchY, 2, getColor(this->color));
-		// drawer_bitmap[(touchY - 20) * 320 + touchX] = getColor(this->color);
 	}
+	return false;
 }
 
 uint16_t Drawer::getColor(uint8_t index) {

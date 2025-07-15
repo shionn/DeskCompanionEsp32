@@ -33,7 +33,8 @@ public:
 
 	void init();
 	void draw();
-	bool touched(uint16_t touchX, uint16_t touchy);
+	bool pressed(uint16_t touchX, uint16_t touchY);
+	bool released(uint16_t touchX, uint16_t touchY);
 
 private:
 	void drawicon(uint16_t x, uint16_t y, const uint16_t* icon);

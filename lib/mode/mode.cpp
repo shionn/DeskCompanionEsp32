@@ -1,6 +1,9 @@
 #include "mode.h"
 
-Mode::Mode(Display* display) {
+Mode::Mode(Dashboard* dashboard, Launchers* launchers, Drawer* drawers, Display* display) {
+	this->dashboard = dashboard;
+	this->launchers = launchers;
+	this->drawers = drawers;
 	this->display = display;
 }
 
@@ -15,16 +18,46 @@ void Mode::draw() {
 	}
 }
 
-boolean Mode::touched(uint16_t touchX, uint16_t touchY) {
-	if (touchX < 25 && touchY>455 && this->value > 0) {
-		this->value--;
-		return true;
+bool Mode::pressed(uint16_t touchX, uint16_t touchY) {
+	bool consummed = false;
+	switch (value) {
+	case 0:
+		consummed = this->dashboard->pressed(touchX, touchY);
+		break;
+	case 1:
+		consummed = this->launchers->pressed(touchX, touchY);
+		break;
+	case 2:
+		consummed = this->drawers->pressed(touchX, touchY);
+		break;
 	}
-	if (touchX > 295 && touchY > 455 && this->value < MAX_MODE) {
-		this->value++;
-		return true;
+	return consummed;
+}
+
+bool Mode::released(uint16_t touchX, uint16_t touchY) {
+	bool consummed = false;
+	switch (value) {
+	case 0:
+		consummed = this->dashboard->released(touchX, touchY);
+		break;
+	case 1:
+		consummed = this->launchers->released(touchX, touchY);
+		break;
+	case 2:
+		consummed = this->drawers->released(touchX, touchY);
+		break;
 	}
-	return false;
+	if (!consummed) {
+		if (touchX < 25 && touchY>455 && this->value > 0) {
+			this->value--;
+			consummed = true;
+		}
+		if (touchX > 295 && touchY > 455 && this->value < MAX_MODE) {
+			this->value++;
+			consummed = true;
+		}
+	}
+	return consummed;
 }
 
 int Mode::get() {

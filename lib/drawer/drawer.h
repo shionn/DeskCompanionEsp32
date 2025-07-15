@@ -12,7 +12,8 @@ private:
 public:
 	Drawer(Display* display);
 	void draw();
-	void touched(uint16_t touchX, uint16_t touchY);
+	bool pressed(uint16_t touchX, uint16_t touchY);
+	bool released(uint16_t touchX, uint16_t touchY);
 	uint16_t getColor(uint8_t index);
 };
 

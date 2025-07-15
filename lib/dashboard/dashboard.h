@@ -16,7 +16,8 @@ private:
 public:
 	Dashboard(Display* display, HomeIot* iot);
 	void draw();
-	void touched(uint16_t touchX, uint16_t touchY);
+	bool pressed(uint16_t touchX, uint16_t touchY);
+	bool released(uint16_t touchX, uint16_t touchY);
 	void update();
 
 private:
