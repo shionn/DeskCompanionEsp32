@@ -5,6 +5,7 @@ Launchers::Launchers(Display* display) {
 }
 
 void Launchers::init() {
+	// this->keyboard.begin();
 }
 
 void Launchers::draw() {
@@ -32,7 +33,7 @@ bool Launchers::released(uint16_t touchX, uint16_t touchY) {
 	if (!this->initialized) {
 		// USB.begin();
 		// keyboard.begin();
-		// this->initialized = true;
+		this->initialized = true;
 	}
 	for (int ix = 0; ix < 4; ix++) {
 		for (int iy = 0; iy < 5; iy++) {
