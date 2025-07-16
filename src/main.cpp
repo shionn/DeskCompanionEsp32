@@ -23,7 +23,7 @@ Display display;
 Storage storage;
 
 Dashboard dashboard(&display, &homeiot);
-Launchers launchers(&display);
+Launchers launchers(&display, &storage);
 Drawer drawer(&display);
 Mode mode(&dashboard, &launchers, &drawer, &display);
 TopBar topbar(&display, &horloge, &network, &mode);

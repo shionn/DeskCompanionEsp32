@@ -6,9 +6,9 @@ void Storage::init() {
 	SD_MMC.begin("/sdmmc", true, false, 20000);
 }
 
-uint16_t* Storage::readSprite(const char* filename) {
+const uint16_t* Storage::readSprite(const char* filename) {
 	File file = SD_MMC.open(filename);
-	uint16_t* result;
+	uint16_t* result = NULL;
 	if (file) {
 		uint8_t header[54];
 		file.read(header, 54);
@@ -19,7 +19,7 @@ uint16_t* Storage::readSprite(const char* filename) {
 
 		if (*(short*)&header[28] == 24) {
 			result = this->readBmp24(file, w, h);
-		} else 		if (*(short*)&header[28] == 16) {
+		} else if (*(short*)&header[28] == 16) {
 			result = this->readBmp16(file, w, h);
 		}
 		file.close();

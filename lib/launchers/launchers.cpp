@@ -1,10 +1,22 @@
 #include "launchers.h"
 
-Launchers::Launchers(Display* display) {
+Launchers::Launchers(Display* display, Storage* storage) {
 	this->display = display;
+	this->storage = storage;
 }
 
 void Launchers::init() {
+#ifndef __SPRITE_FROM_FLASH__
+	for (int iy = 0; iy < 5; iy++) {
+		for (int ix = 0; ix < 4; ix++) {
+			String file = String("/launcher/") + String(iy * 4 + ix + 1) + String(".bmp");
+			const uint16_t* buffer = this->storage->readSprite(file.c_str());
+			if (buffer) {
+				this->shortcuts[iy][ix].icon = buffer;
+			}
+		}
+	}
+#endif
 	// this->keyboard.begin();
 }
 
