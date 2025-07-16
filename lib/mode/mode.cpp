@@ -1,13 +1,29 @@
 #include "mode.h"
 
-Mode::Mode(Dashboard* dashboard, Launchers* launchers, Drawer* drawers, Display* display) {
+Mode::Mode(Dashboard* dashboard, Launchers* launchers, Drawer* drawers, Display* display, Config* config) {
 	this->dashboard = dashboard;
 	this->launchers = launchers;
 	this->drawers = drawers;
 	this->display = display;
+	this->config = config;
 }
 
 void Mode::draw() {
+	switch (this->value) {
+	default:
+	case 0:
+		this->dashboard->draw();
+		break;
+	case 1:
+		this->launchers->draw();
+		break;
+	case 2:
+		this->drawers->draw();
+		break;
+	case 3:
+		this->config->draw();
+		break;
+	}
 	if (this->value > 0) {
 		this->display->fillCircle(14, 465, 12, RGB565_DARKGREY);
 		this->display->fillTriangle(5, 465, 20, 460, 20, 470, RGB565_WHITE);
@@ -30,6 +46,9 @@ bool Mode::pressed(uint16_t touchX, uint16_t touchY) {
 	case 2:
 		consummed = this->drawers->pressed(touchX, touchY);
 		break;
+	case 3:
+		consummed = this->config->pressed(touchX, touchY);
+		break;
 	}
 	return consummed;
 }
@@ -45,6 +64,9 @@ bool Mode::released(uint16_t touchX, uint16_t touchY) {
 		break;
 	case 2:
 		consummed = this->drawers->released(touchX, touchY);
+		break;
+	case 3:
+		consummed = this->config->released(touchX, touchY);
 		break;
 	}
 	if (!consummed) {

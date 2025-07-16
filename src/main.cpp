@@ -15,6 +15,7 @@
 #include "mode.h"
 #include "network.h"
 #include "storage.h"
+#include "config.h"
 
 Network network;
 HomeIot homeiot;
@@ -25,7 +26,8 @@ Storage storage;
 Dashboard dashboard(&display, &homeiot);
 Launchers launchers(&display, &storage);
 Drawer drawer(&display);
-Mode mode(&dashboard, &launchers, &drawer, &display);
+Config config(&display);
+Mode mode(&dashboard, &launchers, &drawer, &display, &config);
 TopBar topbar(&display, &horloge, &network, &mode);
 
 // uint16_t* buffer[20];
@@ -63,18 +65,6 @@ void loop() {
 	}
 
 	topbar.draw();
-	switch (mode.get()) {
-	default:
-	case 0:
-		dashboard.draw();
-		break;
-	case 1:
-		launchers.draw();
-		break;
-	case 2:
-		drawer.draw();
-		break;
-	}
 	mode.draw();
 
 	// for (int i = 0; i < 20; i++) {
