@@ -44,12 +44,6 @@ bool Launchers::released(uint16_t touchX, uint16_t touchY) {
 					this->keyboard.press(KEY_LEFT_CTRL);
 					this->keyboard.press(this->shortcuts[iy][ix].key);
 					this->keyboard.releaseAll();
-					// delay(1);
-					// this->keyboard.print(this->toLocalFr(this->shortcuts[iy][ix].cmd));
-					// delay(10);
-					// this->keyboard.press(KEY_RETURN);
-					// delay(1);
-					// this->keyboard.releaseAll();
 					return true;
 				}
 			}

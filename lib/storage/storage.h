@@ -19,6 +19,7 @@ public:
 	uint16_t* readSprite(const char* file);
 private:
 	uint16_t* readBmp24(File bmpFile, uint16_t w, uint16_t h);
+	uint16_t* readBmp16(File bmpFile, uint16_t w, uint16_t h);
 };
 
 

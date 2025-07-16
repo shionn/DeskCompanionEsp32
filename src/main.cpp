@@ -28,14 +28,14 @@ Drawer drawer(&display);
 Mode mode(&dashboard, &launchers, &drawer, &display);
 TopBar topbar(&display, &horloge, &network, &mode);
 
-uint16_t* buffer;
+// uint16_t* buffer[20];
 
 void setup() {
 	Serial.begin(115200);
 
 	display.init();
 	display.fillScreen(RGB565_WHITE);
-	display.drawCenterText(160, 240, "Starting...", RGB565_BLACK);
+	display.drawCenterText(160, 240, F("Starting..."), RGB565_BLACK);
 	display.flush();
 
 	network.init();
@@ -43,15 +43,15 @@ void setup() {
 	launchers.init();
 	horloge.init();
 
-	buffer = storage.readSprite("/icon/mimic.bmp");
+	// for (int i = 0; i < 20; i++) {
+	// 	buffer[i] = storage.readSprite("/icon/steam.bmp");
+	// }
 }
 
 bool touch = false;
 
 void loop() {
 	if (mode.get() != 2) display.fillScreen(RGB565_WHITE);
-
-
 
 	dashboard.update();
 	if (display.isTouched()) {
@@ -77,8 +77,9 @@ void loop() {
 	}
 	mode.draw();
 
-	display.drawSprite(5, 300, buffer);
-
+	// for (int i = 0; i < 20; i++) {
+	// 	display.drawSprite(i * 2, 300, buffer[i]);
+	// }
 	display.flush();
 }
 
