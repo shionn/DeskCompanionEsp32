@@ -31,8 +31,8 @@ bool Launchers::pressed(uint16_t touchX, uint16_t touchY) {
 
 bool Launchers::released(uint16_t touchX, uint16_t touchY) {
 	if (!this->initialized) {
-		// USB.begin();
-		// keyboard.begin();
+		USB.begin();
+		keyboard.begin();
 		this->initialized = true;
 	}
 	for (int ix = 0; ix < 4; ix++) {
@@ -41,15 +41,15 @@ bool Launchers::released(uint16_t touchX, uint16_t touchY) {
 			int y = iy * 64 + 26 + 16 * iy;
 			if (touchX >= x && touchX < x + 64 && touchY >= y && touchY < y + 64) {
 				if (this->shortcuts[iy][ix].icon) {
-					this->keyboard.press(KEY_LEFT_ALT);
-					this->keyboard.press(KEY_F2);
+					this->keyboard.press(KEY_LEFT_CTRL);
+					this->keyboard.press(this->shortcuts[iy][ix].key);
 					this->keyboard.releaseAll();
-					delay(1);
-					this->keyboard.print(this->toLocalFr(this->shortcuts[iy][ix].cmd));
-					delay(10);
-					this->keyboard.press(KEY_RETURN);
-					delay(1);
-					this->keyboard.releaseAll();
+					// delay(1);
+					// this->keyboard.print(this->toLocalFr(this->shortcuts[iy][ix].cmd));
+					// delay(10);
+					// this->keyboard.press(KEY_RETURN);
+					// delay(1);
+					// this->keyboard.releaseAll();
 					return true;
 				}
 			}
