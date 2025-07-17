@@ -10,6 +10,7 @@
 #include "horloge.h"
 #include "const.h"
 #include "mode.h"
+#include "config.h"
 
 class TopBar {
 private:
@@ -17,8 +18,9 @@ private:
 	Horloge* horloge;
 	Network* network;
 	Mode* mode;
+	Config* config;
 public:
-	TopBar(Display* display, Horloge* horloge, Network* network, Mode* mode);
+	TopBar(Display* display, Horloge* horloge, Network* network, Mode* mode, Config* config);
 
 	void draw();
 };

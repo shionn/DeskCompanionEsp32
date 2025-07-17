@@ -7,6 +7,7 @@
 class Config {
 private:
 	Display* display;
+	bool fps = false;
 public:
 	Config(Display* display);
 
@@ -14,6 +15,8 @@ public:
 	void draw();
 	bool pressed(uint16_t touchX, uint16_t touchY);
 	bool released(uint16_t touchX, uint16_t touchY);
+
+	bool isFpsEnable();
 
 };
 

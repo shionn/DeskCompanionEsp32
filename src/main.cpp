@@ -23,12 +23,12 @@ Horloge horloge;
 Display display;
 Storage storage;
 
+Config config(&display);
 Dashboard dashboard(&display, &homeiot);
 Launchers launchers(&display, &storage);
 Drawer drawer(&display);
-Config config(&display);
 Mode mode(&dashboard, &launchers, &drawer, &display, &config);
-TopBar topbar(&display, &horloge, &network, &mode);
+TopBar topbar(&display, &horloge, &network, &mode, &config);
 
 // uint16_t* buffer[20];
 
@@ -52,20 +52,21 @@ void setup() {
 bool touch = false;
 
 void loop() {
-	if (mode.get() != 2) display.fillScreen(RGB565_WHITE);
-
-	dashboard.update();
+	bool changed = dashboard.update();
 	if (display.isTouched()) {
 		touch = true;
-		mode.pressed(display.touchX, display.touchY);
+		changed |= mode.pressed(display.touchX, display.touchY);
 	} else if (touch) {
 		touch = false;
-		mode.released(display.touchX, display.touchY);
+		changed |= mode.released(display.touchX, display.touchY);
 	}
 
-	topbar.draw();
-	mode.draw();
+	if (changed) display.fillScreen(RGB565_WHITE);
 
+	topbar.draw();
+	if (changed) {
+		mode.draw();
+	}
 	display.flush();
 }
 

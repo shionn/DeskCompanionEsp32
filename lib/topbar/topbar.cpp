@@ -1,14 +1,16 @@
 
 #include "topbar.h"
 
-TopBar::TopBar(Display* display, Horloge* horloge, Network* network, Mode* mode) {
+TopBar::TopBar(Display* display, Horloge* horloge, Network* network, Mode* mode, Config* config) {
 	this->display = display;
 	this->horloge = horloge;
 	this->network = network;
 	this->mode = mode;
+	this->config = config;
 };
 
-// TODO calcul de fps
+u_int32_t last = millis();
+
 void TopBar::draw() {
 	display->fillRect(0, 0, 320, 18, RGB565_BLACK);
 	String date = horloge->getHour() < 10 ? "0" + String(horloge->getHour()) : String(horloge->getHour());
@@ -24,6 +26,11 @@ void TopBar::draw() {
 		} else {
 			display->drawCircle(5 + i * 9, 9, 3, RGB565_WHITE);
 		}
+	}
+	if (this->config->isFpsEnable()) {
+		uint32_t current = millis();
+		this->display->drawCenterText(240, 2, String(1000 / (current - last)), RGB565_WHITE);
+		last = current;
 	}
 };
 

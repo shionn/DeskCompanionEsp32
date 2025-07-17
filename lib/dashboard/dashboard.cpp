@@ -51,7 +51,7 @@ void Dashboard::drawElecBar(uint16_t y, String text, float_t value, float_t min,
 }
 
 
-void Dashboard::update() {
+bool Dashboard::update() {
 	if (!cpu || millis() > lastUpdated + 60 * 1000) {
 		lastUpdated = millis();
 		this->cpu = iot->getCaptorF(111);
@@ -62,7 +62,9 @@ void Dashboard::update() {
 		this->elec_consso = iot->getHaF("sensor.envoy_122333059807_consommation_electrique_actuelle");
 		this->elec_prod = iot->getHaF("sensor.envoy_122333059807_production_d_electricite_actuelle");
 		this->exterior = iot->getHaF("weather.forecast_maison", "temperature");
+		return true;
 	}
+	return false;
 };
 
 boolean Dashboard::pressed(uint16_t touchX, uint16_t touchY) { return false; }

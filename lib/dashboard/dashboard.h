@@ -18,7 +18,7 @@ public:
 	void draw();
 	bool pressed(uint16_t touchX, uint16_t touchY);
 	bool released(uint16_t touchX, uint16_t touchY);
-	void update();
+	bool update();
 
 private:
 	void drawTempBar(uint16_t y, String text, float_t value, uint16_t min, uint16_t max);
