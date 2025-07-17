@@ -41,13 +41,12 @@ void setup() {
 	display.flush();
 
 	network.init();
+#ifndef __SPRITE_FROM_FLASH__
 	storage.init();
+#endif
 	launchers.init();
 	horloge.init();
 
-	// for (int i = 0; i < 20; i++) {
-	// 	buffer[i] = storage.readSprite("/icon/steam.bmp");
-	// }
 }
 
 bool touch = false;
@@ -67,9 +66,6 @@ void loop() {
 	topbar.draw();
 	mode.draw();
 
-	// for (int i = 0; i < 20; i++) {
-	// 	display.drawSprite(i * 2, 300, buffer[i]);
-	// }
 	display.flush();
 }
 
