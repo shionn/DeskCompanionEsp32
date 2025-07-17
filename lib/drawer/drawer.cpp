@@ -8,7 +8,7 @@ Drawer::Drawer(Display* display) {
 void Drawer::draw() {
 	// this->display->getGfx()->draw16bitRGBBitmap(0, 20, drawer_bitmap, 320, 430);
 	for (uint8_t i = 0; i < 8; i++) {
-		display->fillRect(30 + i * 30, 450, 30, 30, this->getColor(i));
+		display->fillRect(40 + i * 30, 450, 30, 30, this->getColor(i));
 	}
 }
 
@@ -21,9 +21,9 @@ bool Drawer::pressed(uint16_t touchX, uint16_t touchY) {
 }
 
 bool Drawer::released(uint16_t touchX, uint16_t touchY) {
-	if (touchY > 450) {
-		if (touchX > 30 && touchX < 290) {
-			int i = (touchX - 30) / 30;
+	if (touchY >= 450) {
+		if (touchX > 40 && touchX < 286) {
+			int i = (touchX - 40) / 30;
 			this->color = i;
 			return true;
 		}

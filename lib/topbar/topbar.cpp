@@ -8,6 +8,7 @@ TopBar::TopBar(Display* display, Horloge* horloge, Network* network, Mode* mode)
 	this->mode = mode;
 };
 
+// TODO calcul de fps
 void TopBar::draw() {
 	display->fillRect(0, 0, 320, 18, RGB565_BLACK);
 	String date = horloge->getHour() < 10 ? "0" + String(horloge->getHour()) : String(horloge->getHour());

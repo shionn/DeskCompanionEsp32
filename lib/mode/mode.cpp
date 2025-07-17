@@ -25,12 +25,12 @@ void Mode::draw() {
 		break;
 	}
 	if (this->value > 0) {
-		this->display->fillCircle(14, 465, 12, RGB565_DARKGREY);
-		this->display->fillTriangle(5, 465, 20, 460, 20, 470, RGB565_WHITE);
+		this->display->fillCircle(18, 462, 16, RGB565_DARKGREY);
+		this->display->fillTriangle(5, 462, 25, 452, 25, 472, RGB565_WHITE);
 	}
 	if (this->value < MAX_MODE) {
-		this->display->fillCircle(306, 465, 12, RGB565_DARKGREY);
-		this->display->fillTriangle(315, 465, 300, 460, 300, 470, RGB565_WHITE);
+		this->display->fillCircle(302, 462, 16, RGB565_DARKGREY);
+		this->display->fillTriangle(315, 462, 295, 452, 295, 472, RGB565_WHITE);
 	}
 }
 
@@ -70,11 +70,11 @@ bool Mode::released(uint16_t touchX, uint16_t touchY) {
 		break;
 	}
 	if (!consummed) {
-		if (touchX < 25 && touchY>455 && this->value > 0) {
+		if (touchX <= 34 && touchY >= 450 && this->value > 0) {
 			this->value--;
 			consummed = true;
 		}
-		if (touchX > 295 && touchY > 455 && this->value < MAX_MODE) {
+		if (touchX >= 286 && touchY >= 450 && this->value < MAX_MODE) {
 			this->value++;
 			consummed = true;
 		}
