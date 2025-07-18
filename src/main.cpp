@@ -30,8 +30,6 @@ Drawer drawer(&display);
 Mode mode(&dashboard, &launchers, &drawer, &display, &config);
 TopBar topbar(&display, &horloge, &network, &mode, &config);
 
-// uint16_t* buffer[20];
-
 void setup() {
 	Serial.begin(115200);
 
@@ -46,7 +44,6 @@ void setup() {
 #endif
 	launchers.init();
 	horloge.init();
-
 }
 
 bool touch = false;
@@ -61,7 +58,8 @@ void loop() {
 		changed |= mode.released(display.touchX, display.touchY);
 	}
 
-	if (changed) display.fillScreen(RGB565_WHITE);
+	if (changed)
+		display.fillScreen(RGB565_WHITE);
 
 	topbar.draw();
 	if (changed) {

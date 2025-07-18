@@ -50,8 +50,6 @@ time_t callNtpTime() {
 };
 
 void Horloge::init() {
-	// Udp.begin(NTP_LOCAL_PORT);
-
 	setSyncProvider(callNtpTime);
 	setSyncInterval(5);
 };
