@@ -17,6 +17,15 @@ void Launchers::init() {
 		}
 	}
 #endif
+	// keyboard.onEvent([](void* handler_arg,
+	// 	esp_event_base_t event_base,
+	// 	int32_t event_id,
+	// 	void* event_data) {
+	// 		switch (event_id) {
+	// 		case USB_EVENT_DISCONNECT:
+	// 		}
+
+	// 	});
 	// this->keyboard.begin();
 }
 
@@ -38,15 +47,15 @@ void Launchers::drawicon(uint16_t ix, uint16_t iy, const uint16_t* icon) {
 }
 
 bool Launchers::pressed(uint16_t touchX, uint16_t touchY) {
-	return false;
-}
-
-bool Launchers::released(uint16_t touchX, uint16_t touchY) {
 	if (!this->initialized) {
 		USB.begin();
 		keyboard.begin();
 		this->initialized = true;
 	}
+	return false;
+}
+
+bool Launchers::released(uint16_t touchX, uint16_t touchY) {
 	for (int ix = 0; ix < 4; ix++) {
 		for (int iy = 0; iy < 5; iy++) {
 			int x = ix * 64 + 8 + 16 * ix;
@@ -54,7 +63,7 @@ bool Launchers::released(uint16_t touchX, uint16_t touchY) {
 			if (touchX >= x && touchX < x + 64 && touchY >= y && touchY < y + 64) {
 				if (this->shortcuts[iy][ix].icon) {
 					this->keyboard.press(KEY_LEFT_CTRL);
-					this->keyboard.press(this->shortcuts[iy][ix].key);
+					this->initialized = this->keyboard.press(this->shortcuts[iy][ix].key);
 					this->keyboard.releaseAll();
 					return true;
 				}
