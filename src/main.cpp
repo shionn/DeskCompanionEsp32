@@ -34,8 +34,8 @@ void setup() {
 	Serial.begin(115200);
 
 	display.init();
-	display.fillScreen(RGB565_WHITE);
-	display.drawCenterText(160, 240, F("Starting..."), RGB565_BLACK);
+	display.fillScreen(RGB565_DARKGREY);
+	display.drawCenterText(160, 240, F("Starting..."), RGB565_LIGHTGREY);
 	display.flush();
 
 	network.init();
@@ -59,7 +59,7 @@ void loop() {
 	}
 
 	if (changed)
-		display.fillScreen(RGB565_WHITE);
+		display.fillScreen(RGB565_DARKGREY);
 
 	topbar.draw();
 	if (changed) {

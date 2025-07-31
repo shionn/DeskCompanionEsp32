@@ -25,12 +25,12 @@ void Mode::draw() {
 		break;
 	}
 	if (this->value > 0) {
-		this->display->fillCircle(18, 462, 16, RGB565_DARKGREY);
-		this->display->fillTriangle(5, 462, 25, 452, 25, 472, RGB565_WHITE);
+		this->display->fillCircle(18, 462, 16, RGB565_BLACK);
+		this->display->fillTriangle(5, 462, 25, 452, 25, 472, RGB565_LIGHTGREY);
 	}
 	if (this->value < MAX_MODE) {
-		this->display->fillCircle(302, 462, 16, RGB565_DARKGREY);
-		this->display->fillTriangle(315, 462, 295, 452, 295, 472, RGB565_WHITE);
+		this->display->fillCircle(302, 462, 16, RGB565_BLACK);
+		this->display->fillTriangle(315, 462, 295, 452, 295, 472, RGB565_LIGHTGREY);
 	}
 }
 

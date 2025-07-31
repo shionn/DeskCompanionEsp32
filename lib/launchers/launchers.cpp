@@ -47,9 +47,17 @@ void Launchers::drawicon(uint16_t ix, uint16_t iy, const uint16_t* icon) {
 }
 
 bool Launchers::pressed(uint16_t touchX, uint16_t touchY) {
-	if (!this->initialized) {
+	if (!this->usbInitialized) {
 		USB.begin();
+		this->usbInitialized = true;
+	}
+	if (!this->initialized) {
+		keyboard.releaseAll();
+		keyboard.end();
+		delay(200);
 		keyboard.begin();
+		delay(200);
+
 		this->initialized = true;
 	}
 	return false;
@@ -62,8 +70,8 @@ bool Launchers::released(uint16_t touchX, uint16_t touchY) {
 			int y = iy * 64 + 26 + 16 * iy;
 			if (touchX >= x && touchX < x + 64 && touchY >= y && touchY < y + 64) {
 				if (this->shortcuts[iy][ix].icon) {
-					this->keyboard.press(KEY_LEFT_CTRL);
-					this->initialized = this->keyboard.press(this->shortcuts[iy][ix].key);
+					this->initialized = this->keyboard.press(KEY_LEFT_CTRL);
+					this->initialized = this->initialized & this->keyboard.press(this->shortcuts[iy][ix].key);
 					this->keyboard.releaseAll();
 					return true;
 				}
@@ -71,13 +79,4 @@ bool Launchers::released(uint16_t touchX, uint16_t touchY) {
 		}
 	}
 	return false;
-}
-
-String Launchers::toLocalFr(String cmd) {
-	cmd.replace('a', 'q');
-	cmd.replace('m', ';');
-	cmd.replace('/', '>');
-	cmd.replace('-', '6');
-	cmd.replace(':', '.');
-	return cmd;
 }
