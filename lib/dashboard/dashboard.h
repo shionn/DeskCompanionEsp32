@@ -11,7 +11,7 @@ private:
 	Display* display;
 	HomeIot* iot;
 	float_t cpu, gpuEdge, gpuJunc, nvme, office, bedroom, exterior;
-	float_t elec_prod, elec_consso, pc_consso;
+	float_t elec_prod, elec_consso, pc_consso, hl_consso;
 	long lastUpdated = 0;
 public:
 	Dashboard(Display* display, HomeIot* iot);
