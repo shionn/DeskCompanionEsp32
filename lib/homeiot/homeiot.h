@@ -25,8 +25,12 @@ public:
 	bool update();
 
 	void registerCaptor(uint16_t captor);
-	void setCaptor(uint16_t captor, String value);
+
 	String getCaptor(uint16_t captor);
+	void setCaptor(uint16_t captor, String value);
+	bool isOn(uint16_t captor);
+	void setOn(uint16_t captor);
+	void setOff(uint16_t captor);
 
 	float_t getCaptorF(uint16_t captor);
 	float_t getHaF(String captor);

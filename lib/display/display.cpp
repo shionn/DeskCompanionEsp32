@@ -78,7 +78,6 @@ void Display::fillTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, u
 	this->gfx->fillTriangle(x1, y1, x2, y2, x3, y3, color);
 };
 
-
 void Display::flush() {
 	this->gfx->flush();
 };
@@ -114,4 +113,12 @@ bool Display::isTouched() {
 	}
 	return false;
 };
+
+bool Display::isTouchOnRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h) {
+	return this->touchX >= x && this->touchX < x + w && this->touchY >= y && this->touchY < y + h;
+}
+
+bool Display::isTouchOnSprite(uint16_t x, uint16_t y, const uint16_t* sprite) {
+	return this->isTouchOnRect(x, y, sprite[0], sprite[1]);
+}
 

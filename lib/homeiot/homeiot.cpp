@@ -65,6 +65,18 @@ String HomeIot::getCaptor(uint16_t captor) {
 	}
 }
 
+bool HomeIot::isOn(uint16_t captor) {
+	return this->getCaptor(captor).equalsIgnoreCase(F("on"));
+}
+
+void HomeIot::setOn(uint16_t captor) {
+	setCaptor(captor, F("on"));
+}
+
+void HomeIot::setOff(uint16_t captor) {
+	setCaptor(captor, F("off"));
+}
+
 float_t HomeIot::getCaptorF(uint16_t captor) {
 	float_t r = 0;
 	if (http.begin(client, HOST_CAPTOR + String(captor))) {

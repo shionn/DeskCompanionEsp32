@@ -47,6 +47,8 @@ public:
 	void flush();
 
 	bool isTouched();
+	bool isTouchOnRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
+	bool isTouchOnSprite(uint16_t x, uint16_t y, const uint16_t* sprite);
 };
 
 #endif
