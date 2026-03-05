@@ -15,6 +15,7 @@ class HomeIot {
 private:
 	WiFiClient client;
 	HTTPClient http;
+	WebServer* server;
 	std::unordered_map<int, String> captors;
 
 public:

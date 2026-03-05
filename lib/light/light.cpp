@@ -5,8 +5,13 @@ Light::Light(Display* display, HomeIot* iot) {
 	this->iot = iot;
 }
 
-void Light::draw() {
+void Light::init() {
+	this->iot->registerCaptor(201);
+}
 
+void Light::draw() {
+	int y = 30;
+	this->display->drawCenterText(160, y, "Lumière", RGB565_BLACK);
 
 }
 

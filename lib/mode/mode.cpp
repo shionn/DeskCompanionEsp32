@@ -1,7 +1,8 @@
 #include "mode.h"
 
-Mode::Mode(Dashboard* dashboard, Launchers* launchers, Drawer* drawers, Display* display, Config* config) {
+Mode::Mode(Dashboard* dashboard, Light* light, Launchers* launchers, Drawer* drawers, Display* display, Config* config) {
 	this->dashboard = dashboard;
+	this->light = light;
 	this->launchers = launchers;
 	this->drawers = drawers;
 	this->display = display;
@@ -15,12 +16,15 @@ void Mode::draw() {
 		this->dashboard->draw();
 		break;
 	case 1:
-		this->launchers->draw();
+		this->light->draw();
 		break;
 	case 2:
-		this->drawers->draw();
+		this->launchers->draw();
 		break;
 	case 3:
+		this->drawers->draw();
+		break;
+	case 4:
 		this->config->draw();
 		break;
 	}
@@ -41,12 +45,15 @@ bool Mode::pressed(uint16_t touchX, uint16_t touchY) {
 		consummed = this->dashboard->pressed(touchX, touchY);
 		break;
 	case 1:
-		consummed = this->launchers->pressed(touchX, touchY);
+		consummed = this->light->pressed(touchX, touchY);
 		break;
 	case 2:
-		consummed = this->drawers->pressed(touchX, touchY);
+		consummed = this->launchers->pressed(touchX, touchY);
 		break;
 	case 3:
+		consummed = this->drawers->pressed(touchX, touchY);
+		break;
+	case 4:
 		consummed = this->config->pressed(touchX, touchY);
 		break;
 	}
@@ -60,12 +67,15 @@ bool Mode::released(uint16_t touchX, uint16_t touchY) {
 		consummed = this->dashboard->released(touchX, touchY);
 		break;
 	case 1:
-		consummed = this->launchers->released(touchX, touchY);
+		consummed = this->light->released(touchX, touchY);
 		break;
 	case 2:
-		consummed = this->drawers->released(touchX, touchY);
+		consummed = this->launchers->released(touchX, touchY);
 		break;
 	case 3:
+		consummed = this->drawers->released(touchX, touchY);
+		break;
+	case 4:
 		consummed = this->config->released(touchX, touchY);
 		break;
 	}

@@ -1,20 +1,19 @@
 
 #include "homeiot.h"
 
-WebServer server(80);
-
 HomeIot::HomeIot() {
 
 }
 
 void HomeIot::init() {
-	server.on(UriBraces("/captor/{}"), HTTP_PUT, [&](void) {this->receiveCaptorValue();});
-	server.on(UriBraces("/captor/{}"), HTTP_POST, [&](void) {this->receiveCaptorValue();});
-	server.begin();
+	this->server = new WebServer(80);
+	this->server->on(UriBraces("/captor/{}"), HTTP_PUT, [&](void) {this->receiveCaptorValue();});
+	this->server->on(UriBraces("/captor/{}"), HTTP_POST, [&](void) {this->receiveCaptorValue();});
+	this->server->begin();
 }
 
 void HomeIot::update() {
-	server.handleClient();
+	this->server->handleClient();
 }
 
 void HomeIot::registerCaptor(uint16_t captor) {
@@ -27,17 +26,16 @@ void HomeIot::registerCaptor(uint16_t captor) {
 }
 
 void HomeIot::receiveCaptorValue() {
-	int captor = server.pathArg(0).toInt();
-	String value = server.arg("plain");
+	int captor = server->pathArg(0).toInt();
+	String value = server->arg("plain");
 	Serial.print(captor);
 	Serial.print(" Receive ");
 	Serial.println(value);
 	captors[captor] = value;
-	server.send(200, "text/plain", "OK");
+	this->server->send(200, "text/plain", "OK");
 }
 
 void HomeIot::setCaptor(uint16_t captor, String value) {
-	String url = HOST_CAPTOR + String(CAPTOR_ID);
 	if (http.begin(client, HOST_CAPTOR + String(captor))) {
 		if (http.POST(value) == 202) {
 

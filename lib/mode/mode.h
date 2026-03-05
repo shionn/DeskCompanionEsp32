@@ -7,20 +7,22 @@
 #include "launchers.h"
 #include "drawer.h"
 #include "config.h"
+#include "light.h"
 
-#define MAX_MODE 3
+#define MAX_MODE 4
 
 class Mode {
 private:
-	int value = 0;
+	int value = 1;
 	Dashboard* dashboard;
+	Light* light;
 	Launchers* launchers;
 	Drawer* drawers;
 	Config* config;
 	Display* display;
 
 public:
-	Mode(Dashboard* dashboard, Launchers* launchers, Drawer* drawers, Display* display, Config* config);
+	Mode(Dashboard* dashboard, Light* light, Launchers* launchers, Drawer* drawers, Display* display, Config* config);
 
 	void draw();
 	bool pressed(uint16_t touchX, uint16_t touchY);

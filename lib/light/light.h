@@ -14,12 +14,11 @@ public:
 	Light(Display* display, HomeIot* iot);
 	void init();
 	bool update();
-	
+
 	void draw();
 	bool pressed(uint16_t touchX, uint16_t touchY);
 	bool released(uint16_t touchX, uint16_t touchY);
 
-}
-
+};
 
 #endif

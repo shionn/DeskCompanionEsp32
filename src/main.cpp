@@ -8,6 +8,7 @@
 #include "dashboard.h"
 #include "display.h"
 #include "drawer.h"
+#include "light.h"
 #include "horloge.h"
 #include "homeiot.h"
 #include "launchers.h"
@@ -25,9 +26,11 @@ Storage storage;
 
 Config config(&display);
 Dashboard dashboard(&display, &homeiot);
+Light light(&display, &homeiot);
 Launchers launchers(&display, &storage);
 Drawer drawer(&display);
-Mode mode(&dashboard, &launchers, &drawer, &display, &config);
+
+Mode mode(&dashboard, &light, &launchers, &drawer, &display, &config);
 TopBar topbar(&display, &horloge, &network, &mode, &config);
 
 
@@ -45,7 +48,9 @@ void setup() {
 #ifndef __SPRITE_FROM_FLASH__
 	storage.init();
 #endif
+	light.init();
 	launchers.init();
+
 	horloge.init();
 }
 
