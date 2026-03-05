@@ -17,16 +17,6 @@ void Launchers::init() {
 		}
 	}
 #endif
-	// keyboard.onEvent([](void* handler_arg,
-	// 	esp_event_base_t event_base,
-	// 	int32_t event_id,
-	// 	void* event_data) {
-	// 		switch (event_id) {
-	// 		case USB_EVENT_DISCONNECT:
-	// 		}
-
-	// 	});
-	// this->keyboard.begin();
 }
 
 void Launchers::draw() {

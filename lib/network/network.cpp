@@ -15,6 +15,8 @@ void Network::init() {
 	Serial.println();
 	Serial.print("Connected. Ip: ");
 	Serial.println(WiFi.localIP().toString());
+	Serial.print("Connected. Mac: ");
+	Serial.println(WiFi.macAddress());
 }
 
 bool Network::connected() {

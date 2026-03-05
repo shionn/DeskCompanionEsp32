@@ -13,13 +13,16 @@ void Dashboard::draw() {
 	this->drawTempBar(y += 22, "Gpu J", this->gpuJunc, 0, 90);
 	this->drawTempBar(y += 22, "Nvme", this->nvme, 0, 90);
 	this->drawWattBar(y += 22, "Consso.", this->pc_consso, 0, 700);
+	this->display->drawCenterText(160, y += 30, "Server", RGB565_BLACK);
+	this->drawTempBar(y += 20, "Cpu", this->cpuServer, 0, 90);
+	this->drawTempBar(y += 22, "Gpu", this->gpuServer, 0, 90);
+	this->drawWattBar(y += 22, "Consso.", this->hl_consso, 0, 700);
 	this->display->drawCenterText(160, y += 30, "Maison", RGB565_BLACK);
 	this->drawTempBar(y += 20, "Exterieur", this->exterior, 0, 50);
 	this->drawTempBar(y += 22, "Bureau", this->office, 0, 50);
 	this->drawTempBar(y += 22, "Morgan", this->bedroom, 0, 50);
 	this->drawElecBar(y += 22, "Prod.", this->elec_prod, 0, 6);
 	this->drawElecBar(y += 22, "Consso.", this->elec_consso, 0, 6);
-	this->drawWattBar(y += 22, "Home Lab", this->hl_consso, 0, 700);
 
 
 }
@@ -58,8 +61,13 @@ bool Dashboard::update() {
 		this->gpuEdge = iot->getCaptorF(110);
 		this->gpuJunc = iot->getCaptorF(114);
 		this->nvme = iot->getCaptorF(112);
+
+		this->cpuServer = iot->getCaptorF(120);
+		this->gpuServer = iot->getCaptorF(121);
+
 		this->office = iot->getCaptorF(100);
 		this->bedroom = iot->getCaptorF(101);
+
 		this->elec_consso = iot->getHaF("sensor.envoy_122333059807_consommation_electrique_actuelle");
 		this->elec_prod = iot->getHaF("sensor.envoy_122333059807_production_d_electricite_actuelle");
 		this->pc_consso = iot->getHaF("sensor.desk_plug_puissance");

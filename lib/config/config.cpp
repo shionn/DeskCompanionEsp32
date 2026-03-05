@@ -11,6 +11,8 @@ void Config::init() {
 void Config::draw() {
 	display->drawText(10, 25, String("Memory ") + String(esp_get_free_heap_size()), RGB565_BLACK);
 	display->drawText(10, 45, String("Display FPS ") + (this->fps ? "true" : "false"), RGB565_BLACK);
+	display->drawText(10, 65, String("IP ") + WiFi.localIP().toString(), RGB565_BLACK);
+	display->drawText(10, 85, String("MAC ") + WiFi.macAddress(), RGB565_BLACK);
 }
 
 bool Config::pressed(uint16_t touchX, uint16_t touchY) {

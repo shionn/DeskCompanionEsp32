@@ -10,8 +10,10 @@ class Dashboard {
 private:
 	Display* display;
 	HomeIot* iot;
-	float_t cpu, gpuEdge, gpuJunc, nvme, office, bedroom, exterior;
-	float_t elec_prod, elec_consso, pc_consso, hl_consso;
+	float_t cpu, gpuEdge, gpuJunc, nvme, pc_consso;
+	float_t cpuServer, gpuServer, hl_consso;
+	float_t office, bedroom, exterior;
+	float_t elec_prod, elec_consso;
 	long lastUpdated = 0;
 public:
 	Dashboard(Display* display, HomeIot* iot);

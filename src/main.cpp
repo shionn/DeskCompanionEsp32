@@ -30,6 +30,7 @@ Drawer drawer(&display);
 Mode mode(&dashboard, &launchers, &drawer, &display, &config);
 TopBar topbar(&display, &horloge, &network, &mode, &config);
 
+
 void setup() {
 	Serial.begin(115200);
 
@@ -39,6 +40,8 @@ void setup() {
 	display.flush();
 
 	network.init();
+	homeiot.init();
+
 #ifndef __SPRITE_FROM_FLASH__
 	storage.init();
 #endif
@@ -49,6 +52,7 @@ void setup() {
 bool touch = false;
 
 void loop() {
+	homeiot.update();
 	bool changed = dashboard.update();
 	if (display.isTouched()) {
 		touch = true;

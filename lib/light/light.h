@@ -1,25 +1,25 @@
 
-#ifndef __CONFIG_H__
-#define __CONFIG_H__
+#ifndef __LIGHT_h__
+#define __LIGHT_h__
 
-#include <WiFi.h>
 #include "display.h"
+#include "homeiot.h"
+#include "const.h"
 
-
-class Config {
+class Light {
 private:
 	Display* display;
-	bool fps = false;
+	HomeIot* iot;
 public:
-	Config(Display* display);
-
+	Light(Display* display, HomeIot* iot);
 	void init();
+	bool update();
+	
 	void draw();
 	bool pressed(uint16_t touchX, uint16_t touchY);
 	bool released(uint16_t touchX, uint16_t touchY);
 
-	bool isFpsEnable();
+}
 
-};
 
 #endif
