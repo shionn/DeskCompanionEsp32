@@ -57,8 +57,8 @@ void setup() {
 bool touch = false;
 
 void loop() {
-	homeiot.update();
-	bool changed = dashboard.update();
+	bool changed = homeiot.update();
+	changed |= dashboard.update();
 	if (display.isTouched()) {
 		touch = true;
 		changed |= mode.pressed(display.touchX, display.touchY);

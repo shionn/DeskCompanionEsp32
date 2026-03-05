@@ -12,8 +12,10 @@ void HomeIot::init() {
 	this->server->begin();
 }
 
-void HomeIot::update() {
+bool HomeIot::update() {
+	this->changed = false;
 	this->server->handleClient();
+	return this->changed;
 }
 
 void HomeIot::registerCaptor(uint16_t captor) {
@@ -33,12 +35,15 @@ void HomeIot::receiveCaptorValue() {
 	Serial.println(value);
 	captors[captor] = value;
 	this->server->send(200, "text/plain", "OK");
+	this->changed = true;
 }
 
 void HomeIot::setCaptor(uint16_t captor, String value) {
 	if (http.begin(client, HOST_CAPTOR + String(captor))) {
-		if (http.POST(value) == 202) {
-
+		if (http.PUT(value) == 202) {
+			Serial.print(captor);
+			Serial.print(" send ");
+			Serial.println(value);
 		}
 		http.end();
 	}

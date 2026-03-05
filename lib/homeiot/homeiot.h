@@ -17,11 +17,12 @@ private:
 	HTTPClient http;
 	WebServer* server;
 	std::unordered_map<int, String> captors;
+	bool changed = false;
 
 public:
 	HomeIot();
 	void init();
-	void update();
+	bool update();
 
 	void registerCaptor(uint16_t captor);
 	void setCaptor(uint16_t captor, String value);

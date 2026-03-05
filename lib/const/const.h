@@ -7,6 +7,10 @@
 // #include "mimic.h"
 #include "wifi.h"
 
+#include "color_wheel.h"
+#include "toggle_on.h"
+#include "toggle_off.h"
+
 #ifdef __SPRITE_FROM_FLASH__
 #include "cura.h"
 #include "discord.h"
