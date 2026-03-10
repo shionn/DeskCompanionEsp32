@@ -39,6 +39,7 @@ void Mode::draw() {
 }
 
 bool Mode::pressed(uint16_t touchX, uint16_t touchY) {
+	// Serial.printf("pressed at %d %d\n", touchX, touchY);
 	bool consummed = false;
 	switch (value) {
 	case 0:
@@ -61,6 +62,7 @@ bool Mode::pressed(uint16_t touchX, uint16_t touchY) {
 }
 
 bool Mode::released(uint16_t touchX, uint16_t touchY) {
+	Serial.printf("released at %d %d\n", touchX, touchY);
 	bool consummed = false;
 	switch (value) {
 	case 0:

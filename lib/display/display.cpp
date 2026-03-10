@@ -78,6 +78,11 @@ void Display::fillTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, u
 	this->gfx->fillTriangle(x1, y1, x2, y2, x3, y3, color);
 };
 
+void Display::drawVLine(uint16_t x, uint16_t y, uint16_t len, uint16_t color) {
+	this->gfx->drawFastVLine(x, y, len, color);
+};
+
+
 void Display::flush() {
 	this->gfx->flush();
 };

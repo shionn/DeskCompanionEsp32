@@ -44,6 +44,10 @@ void HomeIot::setCaptor(uint16_t captor, String value) {
 			Serial.print(captor);
 			Serial.print(" send ");
 			Serial.println(value);
+			auto it = captors.find(captor);
+			if (it != captors.end()) {
+				captors[captor] = value;
+			}
 		}
 		http.end();
 	}
