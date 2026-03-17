@@ -10,6 +10,8 @@
 #include "color_wheel.h"
 #include "toggle_on.h"
 #include "toggle_off.h"
+#include "toggle_v_on.h"
+#include "toggle_v_off.h"
 
 #ifdef __SPRITE_FROM_FLASH__
 #include "cura.h"
