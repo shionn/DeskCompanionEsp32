@@ -17,14 +17,16 @@
 #include "network.h"
 #include "storage.h"
 #include "config.h"
+#include "error.h"
 
+LastError error;
 Network network;
-HomeIot homeiot;
+HomeIot homeiot(&error);
 Horloge horloge;
 Display display;
 Storage storage;
 
-Config config(&display);
+Config config(&display, &error);
 Dashboard dashboard(&display, &homeiot);
 Light light(&display, &homeiot);
 Launchers launchers(&display, &storage);
@@ -37,6 +39,8 @@ TopBar topbar(&display, &horloge, &network, &mode, &config);
 void setup() {
 	Serial.begin(115200);
 
+	error.set("restart", String(esp_reset_reason()));
+
 	display.init();
 	display.fillScreen(RGB565_DARKGREY);
 	display.drawCenterText(160, 240, F("Starting..."), RGB565_LIGHTGREY);
@@ -44,6 +48,7 @@ void setup() {
 
 	network.init();
 	homeiot.init();
+
 
 #ifndef __SPRITE_FROM_FLASH__
 	storage.init();

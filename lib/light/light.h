@@ -17,6 +17,11 @@
 #define DESK_SHELF_LIGHT_HSV_2 137
 #define DESK_SHELF_LIGHT_MODE 138
 
+#define DESK_BUBBLE_LIGHT_STATE 140
+#define DESK_BUBBLE_LIGHT_HSV 141
+#define DESK_BUBBLE_LIGHT_HSV_2 142
+#define DESK_BUBBLE_LIGHT_MODE 143
+
 class Light {
 private:
 	Display* display;

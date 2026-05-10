@@ -8,6 +8,8 @@
 #include <uri/UriBraces.h>
 #include <unordered_map>
 
+#include "error.h"
+
 #define HOST_CAPTOR "http://homeiot/captor/"
 #define HOST_HA "http://homeiot/ha/"
 
@@ -18,9 +20,10 @@ private:
 	WebServer* server;
 	std::unordered_map<int, String> captors;
 	bool changed = false;
+	LastError* error;
 
 public:
-	HomeIot();
+	HomeIot(LastError* error);
 	void init();
 	bool update();
 

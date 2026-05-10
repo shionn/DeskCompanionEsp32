@@ -15,6 +15,10 @@ void Light::init() {
 	this->iot->registerCaptor(DESK_SHELF_LIGHT_HSV);
 	this->iot->registerCaptor(DESK_SHELF_LIGHT_HSV_2);
 	this->iot->registerCaptor(DESK_SHELF_LIGHT_MODE);
+	this->iot->registerCaptor(DESK_BUBBLE_LIGHT_STATE);
+	this->iot->registerCaptor(DESK_BUBBLE_LIGHT_HSV);
+	this->iot->registerCaptor(DESK_BUBBLE_LIGHT_HSV_2);
+	this->iot->registerCaptor(DESK_BUBBLE_LIGHT_MODE);
 }
 
 void Light::drawColorRect(uint16_t x, uint16_t y, uint8_t r, uint8_t g, uint8_t b) {
@@ -27,6 +31,7 @@ void Light::draw() {
 	} else {
 		this->drawLightLine(DESK_ROOF_LIGHT_STATE, 0, F("Plafon"), DESK_ROOF_LIGHT_MODE);
 		this->drawLightLine(DESK_SHELF_LIGHT_STATE, 1, F("Etagere"), DESK_SHELF_LIGHT_MODE);
+		this->drawLightLine(DESK_BUBBLE_LIGHT_STATE, 2, F("Bubble"), DESK_BUBBLE_LIGHT_MODE);
 	}
 }
 
@@ -73,6 +78,10 @@ boolean Light::released(uint16_t touchX, uint16_t touchY) {
 		changed = changed || testColorPick(DESK_SHELF_LIGHT_HSV_2, 1, 1);
 		changed = changed || testTogglePick(DESK_SHELF_LIGHT_STATE, 1);
 		changed = changed || testModePick(DESK_SHELF_LIGHT_MODE, 1);
+		changed = changed || testColorPick(DESK_BUBBLE_LIGHT_HSV, 0, 2);
+		changed = changed || testColorPick(DESK_BUBBLE_LIGHT_HSV_2, 1, 2);
+		changed = changed || testTogglePick(DESK_BUBBLE_LIGHT_STATE, 2);
+		changed = changed || testModePick(DESK_BUBBLE_LIGHT_MODE, 2);
 	}
 	return changed;
 };

@@ -4,14 +4,16 @@
 
 #include <WiFi.h>
 #include "display.h"
+#include "error.h"
 
 
 class Config {
 private:
 	Display* display;
+	LastError* error;
 	bool fps = false;
 public:
-	Config(Display* display);
+	Config(Display* display, LastError* error);
 
 	void init();
 	void draw();

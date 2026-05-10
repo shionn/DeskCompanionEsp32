@@ -1,8 +1,8 @@
 
 #include "homeiot.h"
 
-HomeIot::HomeIot() {
-
+HomeIot::HomeIot(LastError* error) {
+	this->error = error;
 }
 
 void HomeIot::init() {
@@ -22,17 +22,19 @@ void HomeIot::registerCaptor(uint16_t captor) {
 	String url = HOST_CAPTOR + String(captor) + String("/register");
 	if (http.begin(client, url)) {
 		http.POST("");
-		Serial.println(http.getString());
+		// Serial.println(http.getString());
 		http.end();
+	} else {
+		this->error->set("registerCaptor", String(captor));
 	}
 }
 
 void HomeIot::receiveCaptorValue() {
 	int captor = server->pathArg(0).toInt();
 	String value = server->arg("plain");
-	Serial.print(captor);
-	Serial.print(" Receive ");
-	Serial.println(value);
+	// Serial.print(captor);
+	// Serial.print(" Receive ");
+	// Serial.println(value);
 	captors[captor] = value;
 	this->server->send(200, "text/plain", "OK");
 	this->changed = true;
@@ -41,15 +43,19 @@ void HomeIot::receiveCaptorValue() {
 void HomeIot::setCaptor(uint16_t captor, String value) {
 	if (http.begin(client, HOST_CAPTOR + String(captor))) {
 		if (http.PUT(value) == 202) {
-			Serial.print(captor);
-			Serial.print(" send ");
-			Serial.println(value);
+			// Serial.print(captor);
+			// Serial.print(" send ");
+			// Serial.println(value);
 			auto it = captors.find(captor);
 			if (it != captors.end()) {
 				captors[captor] = value;
 			}
+		} else {
+			this->error->set("setCaptor", String(String(captor) + " " + value));
 		}
 		http.end();
+	} else {
+		this->error->set("setCaptor", String(String(captor) + " " + value));
 	}
 }
 
@@ -57,11 +63,15 @@ String HomeIot::getCaptor(uint16_t captor) {
 	auto it = captors.find(captor);
 	if (it == captors.end()) {
 		String r = "";
-		if (http.begin(client, HOST_CAPTOR + String(captor))) {
+		if (http.begin(client, String(HOST_CAPTOR + String(captor)))) {
 			if (http.GET() == 202) {
 				r = http.getString();
+			} else {
+				this->error->set("getCaptor", String(captor));
 			}
 			http.end();
+		} else {
+			this->error->set("getCaptor", String(captor));
 		}
 		return r;
 	} else {

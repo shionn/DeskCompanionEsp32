@@ -18,7 +18,6 @@
 #define TOUCH_INT_PIN 11
 #define AXS_MAX_TOUCH_NUMBER 1
 
-
 class Display {
 private:
 	Arduino_DataBus* bus = new Arduino_ESP32QSPI(45, 47, 21, 48, 40, 39);
